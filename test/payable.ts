@@ -20,8 +20,10 @@ describe("payable test",function(){
         await payable1.deposit({value:utils.parseEther('18')});
         expect(await ethers.provider.getBalance(payable.address)).to.be.equal(utils.parseEther('28'))
         await payable1.transfer(account2.address,utils.parseEther('11.3'));
+        await payable1.transfer2(account2.address,utils.parseEther('1'));
+        await payable1.transfer3(account2.address,utils.parseEther('2'));
         //此次花费的gas 来自account1
-        expect(await ethers.provider.getBalance(payable.address)).to.be.equal(utils.parseEther('16.7'))
+        expect(await ethers.provider.getBalance(payable.address)).to.be.equal(utils.parseEther('13.7'))
         console.log('!!!!',await ethers.provider.getBalance(account2.address))
     })
 })

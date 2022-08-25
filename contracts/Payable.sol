@@ -25,4 +25,13 @@ contract Payable {
         require(success,"failed to transfer ethers");
     }
 
+    function transfer2(address payable _to,uint _amount) public {
+        _to.transfer(_amount);
+    }
+
+    function transfer3(address payable _to,uint _amount) public {
+        (bool success) = _to.send(_amount);
+        require(success,"failed to send ethers");
+    }
+
 }

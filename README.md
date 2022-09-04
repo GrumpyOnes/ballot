@@ -760,4 +760,54 @@ contract AccessControl {
 
 }
 
+// ****** 自毁合约 *****
+
+contract Kill {
+    constructor() payable {}
+    function kill() external{
+        selfdestruct(payable(msg,sender));
+    }
+    function testCall() external pure returns (uint){
+        return 123;
+    }
+}
+contract Helper{
+    function getBalance() external view returns (uint) {
+        return address(this).balance;
+    }
+    function kill(Kill _kill) external{
+        _kill.kill();
+    }
+}
+
+// ***** 小猪存钱罐 ******
+contract PiggyBank {
+    event Deposit(uint amount);
+    event Withdraw(uint amount);
+    address public owner = msg.sender;
+    receive() external payable{
+        emit Deposit(msg.value);
+    }
+    function withdraw() external {
+        require(msg.sender ==owner,"not owner");
+        emit Withdraw(address(this).balance);
+        selfdestruct(payable(msg.sender)); //自毁 并转移资金
+    }
+}
+
+//****** ERC20 标准 （只关心接口 不关心实现）*******
+
+//****** 多签钱包 53 ******
+
+//******* 函数签名 ********
+msg.data  = bytes4(keccak256(bytes(_funcName))) + bytes(params...)
+
+//***   荷兰拍卖 DutchAuction ****
+
+1.deploy一个ERC721，如MyAPE，mint一个token 1
+2.deploy dutchAuction， 参数是 10000000,1,myape的地址，1，token1的真实owner地址。
+3.myape授权token 1  approve给dutchAutch地址。
+3.执行buy。
+
+//***   英式拍卖 EnglishAuction ****
 ```

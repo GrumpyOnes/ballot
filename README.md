@@ -810,4 +810,6 @@ msg.data  = bytes4(keccak256(bytes(_funcName))) + bytes(params...)
 3.执行buy。
 
 //***   英式拍卖 EnglishAuction ****
+
+//***   ERC20 众筹 ******
 ```

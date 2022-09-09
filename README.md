@@ -812,4 +812,15 @@ msg.data  = bytes4(keccak256(bytes(_funcName))) + bytes(params...)
 //***   英式拍卖 EnglishAuction ****
 
 //***   ERC20 众筹 ******
+
+//*** Create2 没跑通 ***** 
+//*** multicall 多重调用 staticcall****
+//*** multidelegatecall 多重委托调用 ****
+涉及到payable 会有bug
+//***  编码解码 ****
+//*** 节约gas ****
+contract GasGolf{
+
+}
+//*** 时间锁合约 ***
 ```
